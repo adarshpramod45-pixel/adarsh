@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+
+void drawLineBresenham(int x0, int y0, int x1, int y1) {
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
+
+    while (true) {
+        // Plot point (x0, y0) on your grid/canvas
+        std::cout << "(" << x0 << ", " << y0 << ")\n";
+        
+        if (x0 == x1 && y0 == y1) break;
+        int e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
+int main() {
+    // Example: draw line from (0,0) to (5, 5)
+    drawLineBresenham(0, 0, 5, 5);
+    return 0;
+}
